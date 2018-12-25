@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
 import 'antd/lib/layout/style/css';
+import Router, { Link, goBack } from 'route-lite';
+
+import CreateWallet from './createWallet/CreateWallet';
 
 const { Header, Footer, Content } = Layout;
 
@@ -11,7 +14,11 @@ class App extends Component {
     return (
       <Layout>
         <Header style={{background: '#fff'}}>Cashier</Header>
-        <Content></Content>
+        <Content>
+          <Router>
+            <CreateWallet />
+          </Router>
+        </Content>
         <Footer>All rights reserved</Footer>
       </Layout>
     );
