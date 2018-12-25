@@ -1,9 +1,7 @@
-.App {
-}
 
 body {
-  height: 600px;
-  width: 400px;
+  height: 700px;
+  width: 500px;
   overflow: hidden;
   text-align: center;
 }
