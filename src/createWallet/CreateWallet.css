@@ -1,0 +1,12 @@
+
+.slidingBox {
+  position: relative;
+  width: 1832px;
+  overflow-x: hidden;
+}
+
+.slidingBoxItem {
+  width: 458px;
+  padding-right: 42px;
+  float: left;
+}
