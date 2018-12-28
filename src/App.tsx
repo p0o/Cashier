@@ -13,13 +13,17 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Header style={{background: '#fff'}}>Cashier</Header>
+        <Header
+          style={{background: '#eee', lineHeight: 1.1}}>
+          <h3 style={{marginTop: 10}}>Cashier</h3>
+          <p>Bitcoin Cash wallet for micro-payments</p>
+        </Header>
         <Content>
           <Router>
             <CreateWallet />
           </Router>
         </Content>
-        <Footer>All rights reserved</Footer>
+        <Footer></Footer>
       </Layout>
     );
   }
