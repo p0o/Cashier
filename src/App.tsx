@@ -18,7 +18,7 @@ class App extends Component {
           <h3 style={{marginTop: 10}}>Cashier</h3>
           <p>Bitcoin Cash wallet for micro-payments</p>
         </Header>
-        <Content>
+        <Content style={{height: '246px', overflow: 'hidden'}}>
           <Router>
             <CreateWallet />
           </Router>

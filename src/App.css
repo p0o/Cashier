@@ -1,6 +1,13 @@
 
 body {
-  width: 500px;
   overflow: hidden;
   text-align: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 500px;
+  max-height: 348px;
 }
