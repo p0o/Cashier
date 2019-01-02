@@ -18,12 +18,17 @@ const steptTitleList = ['Start', 'Seed', 'Confirm', 'Done'];
 
 function CreateWallet(props: Props) {
   const [slideNo, setSlideNo] = useState(0);
+  const [currentSeed, setCurrentSeed] = useState('');
 
   function stepStatus(current: number): 'finish' | 'wait' | 'process' {
     if (slideNo > current) return 'finish';
     if (slideNo < current) return 'wait';
     return 'process';
-  }  
+  }
+
+  function handleGeneratedSeed(seed: string): void {
+    setCurrentSeed(seed);
+  }
 
   return (
     <Row>
@@ -56,6 +61,7 @@ function CreateWallet(props: Props) {
                 {slideNo === 1 &&
                   <GenerateSeed
                     goToNextStep={() => setSlideNo(slideNo + 1)}
+                    onGenerateSeed={handleGeneratedSeed}
                   />
                 }
               </div>

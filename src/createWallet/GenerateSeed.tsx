@@ -6,17 +6,24 @@ import 'antd/lib/progress/style/css';
 import 'antd/lib/button/style/css';
 
 type Props = {
-  goToNextStep: () => void
+  goToNextStep: () => void,
+  onGenerateSeed: (seed: string) => void,
 };
 
 const sampleMnemonic = 'disagree tide elbow citizen jazz cinnamon bridge certain april settle pact film always inmate border inform solution that submit produce cloth balcony upper maid';
 
-function GenerateSeed({ goToNextStep }: Props) {
+function GenerateSeed({ goToNextStep, onGenerateSeed }: Props) {
   const [fakeProgress, setFakeProgress] = useState(0);
   const [showGuide, setShowGuide] = useState(false);
+  const [seed, setSeed] = useState('');
 
   useEffect(() => {
-    if (fakeProgress >= 100) return;
+    if (fakeProgress >= 100) {
+      setSeed(sampleMnemonic);
+      onGenerateSeed(sampleMnemonic);
+      return;
+    }
+    
     // don't take it seriously, just giving a false sense of progress for UX reasons
     const increment =  fakeProgress < 80 ? 40 : fakeProgress >= 80 ? 18 : 10; 
     setTimeout(() => setFakeProgress(fakeProgress + increment), 300);
@@ -50,7 +57,7 @@ function GenerateSeed({ goToNextStep }: Props) {
             <br />
             <p style={{fontWeight: 'bold', textAlign: 'center'}}>Write it down on paper and keep it secretly.</p>
             <div style={{textAlign: 'center', background: '#d9d9d9', borderRadius: '5px', padding: '5px'}}>
-              { sampleMnemonic }
+              { seed }
             </div>
           </Row>
           <Row style={{marginTop: 10}}>
