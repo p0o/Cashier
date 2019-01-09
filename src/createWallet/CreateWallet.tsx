@@ -8,9 +8,12 @@ import 'antd/lib/icon/style/css';
 import 'antd/lib/col/style/css';
 import 'antd/lib/row/style/css';
 import 'antd/lib/button/style/css';
+import 'antd/lib/select/style/css';
+
 import './CreateWallet.css';
 import CreateWalletStart from './CreateWalletStart';
 import GenerateSeed from './GenerateSeed';
+import ConfirmSeed from './ConfirmSeed';
 
 type Props = any;
 const { Step } = Steps;
@@ -48,7 +51,7 @@ function CreateWallet(props: Props) {
         </Row>
         <Flipper flipKey={slideNo}>
           <div className="slidingBox" style={{left: -458 * slideNo}}>
-            <Flipped flipId="1">
+            <Flipped flipId="1" key="1">
               <div className="slidingBoxItem">
                 <CreateWalletStart
                   goToNextStep={() => setSlideNo(slideNo + 1)}
@@ -56,12 +59,23 @@ function CreateWallet(props: Props) {
               </div>
             </Flipped>
 
-            <Flipped flipId="2">
+            <Flipped flipId="2" key="2">
               <div className="slidingBoxItem">
                 {slideNo === 1 &&
                   <GenerateSeed
                     goToNextStep={() => setSlideNo(slideNo + 1)}
                     onGenerateSeed={handleGeneratedSeed}
+                  />
+                }
+              </div>
+            </Flipped>
+
+            <Flipped flipId="3" key="3">
+              <div className="slidingBoxItem">
+                {slideNo === 2 &&
+                  <ConfirmSeed
+                    goToNextStep={() => setSlideNo(slideNo + 1)}
+                    seed={currentSeed}
                   />
                 }
               </div>
