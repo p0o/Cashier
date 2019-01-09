@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Button, Select } from 'antd';
 import shuffle from '../utils/shuffle';
+import seedMatches from '../utils/seedMatches';
 
 const Option = Select.Option;
 
@@ -10,9 +11,16 @@ type Props = {
 };
 
 function ConfirmSeed({ goToNextStep, seed }: Props) {
-  const seedSelectChildren = shuffle(seed.split(' ')).map(mnemonicWord =>
+  const [enteredSeed, setEnteredSeed] = useState(['']);
+  const seedList = seed.split(' ');
+
+  const seedSelectChildren = shuffle(seedList.map(mnemonicWord =>
     <Option key={mnemonicWord}>{mnemonicWord}</Option>
-  );
+  ));
+
+  const handleSeedConfirmation = (seedValues : any) : void => {
+    setEnteredSeed(seedValues);
+  }
 
   return (
     <React.Fragment>
@@ -22,9 +30,15 @@ function ConfirmSeed({ goToNextStep, seed }: Props) {
           style={{width: '100%'}}
           mode="tags"
           placeholder="Choose your recovery seed words, one by one"
+          onChange={handleSeedConfirmation}
         >
           { seedSelectChildren }
         </Select>
+      </Row>
+      <Row>
+        { seedMatches(enteredSeed, seedList) &&
+          <Button onClick={goToNextStep}>Done</Button>
+        }
       </Row>
     </React.Fragment>
   );
