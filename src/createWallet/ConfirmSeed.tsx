@@ -14,9 +14,11 @@ function ConfirmSeed({ goToNextStep, seed }: Props) {
   const [enteredSeed, setEnteredSeed] = useState(['']);
   const seedList = seed.split(' ');
 
-  const seedSelectChildren = shuffle(seedList.map(mnemonicWord =>
-    <Option key={mnemonicWord}>{mnemonicWord}</Option>
-  ));
+  const seedSelectChildren = shuffle(
+    seedList.filter(x => !enteredSeed.includes(x))
+    .slice(0, 3)
+    .map(mnemonicWord => <Option key={mnemonicWord}>{mnemonicWord}</Option>)
+  );
 
   const handleSeedConfirmation = (seedValues : any) : void => {
     setEnteredSeed(seedValues);
@@ -28,7 +30,7 @@ function ConfirmSeed({ goToNextStep, seed }: Props) {
       <Row style={{marginTop: 16}}>
         <Select
           style={{width: '100%'}}
-          mode="tags"
+          mode="multiple"
           placeholder="Choose your recovery seed words, one by one"
           onChange={handleSeedConfirmation}
         >
