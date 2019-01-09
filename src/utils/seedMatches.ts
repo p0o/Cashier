@@ -6,12 +6,12 @@ const seedMatches = (questionedSeed: string[], originalSeed: string[]) : Boolean
   let sequenceIsNotBroken = true;
 
   questionedSeed.forEach((word, idx) => {
-    if (originalSeed[idx].match(`/^${word}/`)) {
-      subsequentConfirmations++;   
+    if (originalSeed[idx] === word ) {
+      subsequentConfirmations++;
     } else sequenceIsNotBroken = false;
   });
 
-  return sequenceIsNotBroken && subsequentConfirmations >= 7
+  return sequenceIsNotBroken && subsequentConfirmations >= 7;
 }
 
 export default seedMatches;
