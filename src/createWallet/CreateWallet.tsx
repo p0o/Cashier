@@ -28,6 +28,11 @@ function CreateWallet(props: Props) {
     setCurrentSeed(seed);
   }
 
+  function handleJumpToAnotherStep(targetStepNum : number) {
+    if (targetStepNum >= slideNo) return;
+    setSlideNo(targetStepNum);
+  }
+
   return (
     <Row>
       <Col span={20} offset={2} style={{overflow: 'hidden'}}>
@@ -38,7 +43,7 @@ function CreateWallet(props: Props) {
                 <Step
                   status={stepStatus(stepIndex)}
                   title={title}
-                  onClick={() => setSlideNo(stepIndex)}
+                  onClick={() => handleJumpToAnotherStep(stepIndex)}
                 />
               ))
             }
