@@ -3,17 +3,12 @@ import { Row, Col, Button, Steps, Icon } from 'antd';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import { Link } from 'route-lite';
 
-import 'antd/lib/steps/style/css'
-import 'antd/lib/icon/style/css';
-import 'antd/lib/col/style/css';
-import 'antd/lib/row/style/css';
-import 'antd/lib/button/style/css';
-import 'antd/lib/select/style/css';
 
 import './CreateWallet.css';
 import CreateWalletStart from './CreateWalletStart';
 import GenerateSeed from './GenerateSeed';
 import ConfirmSeed from './ConfirmSeed';
+import Done from './Done';
 
 type Props = any;
 const { Step } = Steps;
@@ -77,6 +72,14 @@ function CreateWallet(props: Props) {
                     goToNextStep={() => setSlideNo(slideNo + 1)}
                     seed={currentSeed}
                   />
+                }
+              </div>
+            </Flipped>
+
+            <Flipped flipId="4">
+              <div className="slidingBoxItem">
+                {slideNo === 3 &&
+                  <Done />
                 }
               </div>
             </Flipped>
