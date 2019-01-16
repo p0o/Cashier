@@ -1,7 +1,7 @@
 // Will be used to make sure the user entered the correct mnemonic seed
 // only the first 7 characters should match
 
-const seedMatches = (questionedSeed: string[], originalSeed: string[]) : Boolean => {
+const seedMatches = (questionedSeed: string[], originalSeed: string[]) : boolean => {
   let subsequentConfirmations = 0;
   let sequenceIsNotBroken = true;
 
