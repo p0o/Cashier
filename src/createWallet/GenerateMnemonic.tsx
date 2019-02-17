@@ -10,23 +10,23 @@ import 'antd/lib/button/style/css';
 
 type Props = {
   goToNextStep: () => void;
-  onGenerateSeed: (seed: string) => void;
+  onGenerateMnemonic: (seed: string) => void;
 };
 
-function GenerateSeed({ goToNextStep, onGenerateSeed }: Props) {
+function GenerateSeed({ goToNextStep, onGenerateMnemonic }: Props) {
   const [fakeProgress, setFakeProgress] = useState(0);
   const [showGuide, setShowGuide] = useState(false);
-  const [seed, setSeed] = useState('');
+  const [mnemonic, setMnemonic] = useState('');
 
   useEffect(() => {
-    if (!seed) {
+    if (!mnemonic) {
       // 12 words mnemonic
       const mnemonic = Bitbox.Mnemonic.generate(128);
-      setSeed(mnemonic);
+      setMnemonic(mnemonic);
     }
 
     if (fakeProgress >= 100) {
-      onGenerateSeed(seed);
+      onGenerateMnemonic(mnemonic);
       return;
     }
 
@@ -47,7 +47,7 @@ function GenerateSeed({ goToNextStep, onGenerateSeed }: Props) {
       {fakeProgress >= 100 && (
         <div>
           <Row style={{ textAlign: 'left' }}>
-            A very strong recovery seed has been generated for you!{' '}
+            A strong recovery seed has been generated for you!{' '}
             <Popover
               title="What is a Recovery Seed"
               content={
@@ -81,7 +81,7 @@ function GenerateSeed({ goToNextStep, onGenerateSeed }: Props) {
                 padding: '5px',
               }}
             >
-              {seed}
+              {mnemonic}
             </div>
           </Row>
           <Row style={{ marginTop: 10 }}>

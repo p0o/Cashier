@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import { Row, Col, Button, Steps, Icon } from "antd";
-import { Flipper, Flipped } from "react-flip-toolkit";
-import { Link } from "route-lite";
+import React, { useState } from 'react';
+import { Row, Col, Button, Steps, Icon } from 'antd';
+import { Flipper, Flipped } from 'react-flip-toolkit';
+import { Link } from 'route-lite';
 
-import "./CreateWallet.css";
-import CreateWalletStart from "./CreateWalletStart";
-import GenerateSeed from "./GenerateSeed";
-import ConfirmSeed from "./ConfirmSeed";
-import Done from "./Done";
+import './CreateWallet.css';
+import CreateWalletStart from './CreateWalletStart';
+import GenerateSeed from './GenerateSeed';
+import ConfirmSeed from './ConfirmSeed';
+import Done from './Done';
 
 type Props = any;
 const { Step } = Steps;
-const steptTitleList = ["Start", "Seed", "Confirm", "Done"];
+const steptTitleList = ['Start', 'Seed', 'Confirm', 'Done'];
 
 function CreateWallet(props: Props) {
   const [slideNo, setSlideNo] = useState(0);
-  const [currentSeed, setCurrentSeed] = useState("");
+  const [currentMnemonic, setCurrentMnemonic] = useState('');
 
-  function stepStatus(current: number): "finish" | "wait" | "process" {
-    if (slideNo > current) return "finish";
-    if (slideNo < current) return "wait";
-    return "process";
+  function stepStatus(current: number): 'finish' | 'wait' | 'process' {
+    if (slideNo > current) return 'finish';
+    if (slideNo < current) return 'wait';
+    return 'process';
   }
 
-  function handleGeneratedSeed(seed: string): void {
-    setCurrentSeed(seed);
+  function handleGeneratedMnemonic(mnemonic: string): void {
+    setCurrentMnemonic(mnemonic);
   }
 
   function handleJumpToAnotherStep(targetStepNum: number) {
@@ -34,7 +34,7 @@ function CreateWallet(props: Props) {
 
   return (
     <Row>
-      <Col span={20} offset={2} style={{ overflow: "hidden" }}>
+      <Col span={20} offset={2} style={{ overflow: 'hidden' }}>
         <Row style={{ marginTop: 15, marginBottom: 15 }}>
           <Steps size="small">
             {steptTitleList.map((title, stepIndex) => (
@@ -61,7 +61,7 @@ function CreateWallet(props: Props) {
                 {slideNo === 1 && (
                   <GenerateSeed
                     goToNextStep={() => setSlideNo(slideNo + 1)}
-                    onGenerateSeed={handleGeneratedSeed}
+                    onGenerateMnemonic={handleGeneratedMnemonic}
                   />
                 )}
               </div>
@@ -72,14 +72,16 @@ function CreateWallet(props: Props) {
                 {slideNo === 2 && (
                   <ConfirmSeed
                     goToNextStep={() => setSlideNo(slideNo + 1)}
-                    seed={currentSeed}
+                    mnemonic={currentMnemonic}
                   />
                 )}
               </div>
             </Flipped>
 
             <Flipped flipId="4" key="4">
-              <div className="slidingBoxItem">{slideNo === 3 && <Done />}</div>
+              <div className="slidingBoxItem">
+                {slideNo === 3 && <Done mnemonic={currentMnemonic} />}
+              </div>
             </Flipped>
           </div>
         </Flipper>
