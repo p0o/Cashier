@@ -5,7 +5,7 @@ import { Link } from 'route-lite';
 
 import './CreateWallet.css';
 import CreateWalletStart from './CreateWalletStart';
-import GenerateSeed from './GenerateSeed';
+import GenerateMnemonic from './GenerateMnemonic';
 import ConfirmSeed from './ConfirmSeed';
 import Done from './Done';
 
@@ -42,6 +42,7 @@ function CreateWallet(props: Props) {
                 status={stepStatus(stepIndex)}
                 title={title}
                 onClick={() => handleJumpToAnotherStep(stepIndex)}
+                key={stepIndex}
               />
             ))}
           </Steps>
@@ -59,7 +60,7 @@ function CreateWallet(props: Props) {
             <Flipped flipId="2" key="2">
               <div className="slidingBoxItem">
                 {slideNo === 1 && (
-                  <GenerateSeed
+                  <GenerateMnemonic
                     goToNextStep={() => setSlideNo(slideNo + 1)}
                     onGenerateMnemonic={handleGeneratedMnemonic}
                   />
